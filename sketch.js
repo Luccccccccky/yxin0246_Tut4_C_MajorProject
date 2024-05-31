@@ -153,7 +153,7 @@ class Wheel {
     g.ellipse(this.x, this.y, eyeSize);
 
     // Draw pupils
-    g.fill(0);
+    g.fill(49,131,186);
     g.ellipse(pupilX, pupilY, pupilSize);
   }
 }
@@ -231,7 +231,7 @@ function drawBouncingBalls() {
 }
 
 function mouseClicked() {
-  let numNewCircles = random(5, 20); 
+  let numNewCircles = random(5, 10); 
   initializeCircles(numNewCircles, mouseX, mouseY); 
   
   // Random wheels with eyes
