@@ -10,7 +10,7 @@ Animated properties include the color and elements. I have added more circle ele
 [link text](https://openprocessing.org/sketch/2275129)
 This artwork inspires me to create the bouncing balls.
 
-![A painting of Buchholz](assets/Dali.jpgDali.jpg)
+![A painting of Buchholz](assets/Dali.jpg)
 ![A painting of Buchholz](assets/TheFalseMirror.jpg)
 The jewel designed by Dali and the painting created by Rene Magritte make me think of the famous element "evil eye".
 However, many jewel designers think "evil eye" contains wishes to avoid misfortune. So I think the new birth should be pure as blue.
