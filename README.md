@@ -1,4 +1,4 @@
-# New born Fortune
+# Newborns
 ## 1.Instructions to Interact
 In this animation, users can click on the canvas to generate random eyes on the wheels, and the pupils will follow the mouse. With the generation of eyes, there will simultaneously generate bouncing balls.
 
