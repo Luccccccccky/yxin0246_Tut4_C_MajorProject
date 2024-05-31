@@ -3,37 +3,36 @@ let dotNumberDecrement = 5; // Decrement of dots
 let wheels = []; // Array to store the wheels
 let circleRadius = 75;
 
-//Arrays to store bouncing balls
 let circles = []; 
 let xSpeeds = [];
 let ySpeeds = [];
-
-let wheelsGraphics; // Store the picture of wheels
+let wheelsGraphics; // Graphics to store the picture of wheels
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  colorMode(HSB);
-  randomSeed(1); // Set random seed for consistency
+  randomSeed(1); 
   wheelsGraphics = createGraphics(windowWidth, windowHeight);
-  initializeWheels();
-  drawWheels();
-  noLoop(); // Only draw once
+  initializeWheels(); 
+  drawWheels(); 
+  noLoop(); // Draw only once
 }
 
 function draw() {
-  clear(); 
+  clear(); // Clear the cnavas
   image(wheelsGraphics, 0, 0); // Draw still wheels
 
   if (circles.length > 0) {
     drawBouncingBalls(); 
   }
+
+  drawEyes(); 
 }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   wheelsGraphics = createGraphics(windowWidth, windowHeight);
   randomSeed(1); 
-  initializeWheels(); 
+  initializeWheels();
   drawWheels(); 
 }
 
@@ -42,9 +41,9 @@ class Wheel {
     this.x = x;
     this.y = y;
     this.radius = radius;
-    this.drawLines = random(1) > 0.5; // Whether draw lines
-    this.drawArcs = random(1) > 0.8; // Whether draw arcs
-    this.numDotRings = 5; // The number of dot rings
+    this.drawLines = random(1) > 0.5; // Whether to draw lines
+    this.drawArcs = random(1) > 0.8; // Whethe rto draw arcs
+    this.numDotRings = 5; // Number of dot rings
     this.dotNumber = [];
 
     // Dot number of each ring
@@ -54,8 +53,8 @@ class Wheel {
     }
 
     this.ringRadius = this.radius;
-    this.col = color(50, random(0, 30), 95); 
-    this.dotColor = color(random(360), 50, 60); 
+    this.col = color(random(200, 255), random(150, 200), random(150, 200)); 
+    this.dotColor = color(random(255), random(255), random(255)); 
   }
 
   display(g) {
@@ -67,7 +66,7 @@ class Wheel {
     // Using if-else to draw two types of wheels
     if (this.drawLines) {
       let numLines = 70; 
-      g.stroke(random(360), 50, 60);
+      g.stroke(random(255), random(255), random(255));
       g.strokeWeight(1.5);
       g.noFill();
 
@@ -110,19 +109,19 @@ class Wheel {
       }
     }
 
-    // Draw inner cirles
+    // Draw inner cirlces
     let numInnerCircles = 5;
     for (let i = 0; i < numInnerCircles; i++) {
       let innerRadius = this.radius * 0.5 * (1 - i * 0.2);
-      g.fill(color(random(330), 50, random(30, 90)));
-      g.stroke(color(random(330), 50, random(30, 90)));
+      g.fill(color(random(200, 255), random(150, 200), random(150, 200)));
+      g.stroke(color(random(200, 255), random(150, 200), random(150, 200)));
       g.strokeWeight(1);
       g.ellipse(this.x, this.y, innerRadius * 1.8);
     }
 
     // Draw pink arcs
     if (this.drawArcs) {
-      g.stroke(348, 63, 90);
+      g.stroke(255, 105, 180); // 粉色
       g.strokeWeight(4);
       g.noFill();
       let arcRadius = this.radius * 2;
@@ -131,10 +130,29 @@ class Wheel {
       g.arc(this.x, this.y - this.radius, arcRadius, arcRadius, startAngle, endAngle);
     }
   }
+
+  drawEye(g) {
+    let eyeSize = this.radius * 0.6;
+    let pupilSize = eyeSize * 0.4;
+    let dx = mouseX - this.x;
+    let dy = mouseY - this.y;
+    let angle = atan2(dy, dx);
+    let pupilX = this.x + cos(angle) * (eyeSize - pupilSize) * 0.3;
+    let pupilY = this.y + sin(angle) * (eyeSize - pupilSize) * 0.3;
+
+    // Draw eye white
+    g.fill(255);
+    g.noStroke();
+    g.ellipse(this.x, this.y, eyeSize);
+
+    // Draw pupils
+    g.fill(0);
+    g.ellipse(pupilX, pupilY, pupilSize);
+  }
 }
 
 function initializeWheels() {
-  wheels = []; //Clear wheels
+  wheels = []; 
   let spacing = 160;
   let rows = height / spacing;
   let cols = width / spacing;
@@ -148,7 +166,7 @@ function initializeWheels() {
 }
 
 function drawWheels() {
-  wheelsGraphics.background(195, 99, 40); 
+  wheelsGraphics.background(195, 195, 195); 
   wheelsGraphics.scale(1.8); 
   wheelsGraphics.translate(width / 2, height / 2);
   wheelsGraphics.rotate(PI / 12);
@@ -159,19 +177,25 @@ function drawWheels() {
   }
 }
 
+function drawEyes() {
+  for (let wheel of wheels) {
+    wheel.drawEye(wheelsGraphics); 
+  }
+}
+
 function initializeCircles(num, x, y) {
   for (let i = 0; i < num; i++) {
     let circle = {
       x: x,
       y: y,
       radius: random(10, 20),
-      r: random(360),
-      g: 80,
-      b: 100
+      r: random(255),
+      g: random(255),
+      b: random(255)
     };
     circles.push(circle);
     xSpeeds.push(random(-3, 3));
-    ySpeeds.push(random(1, 5)); // Effects to imitate the Gravity
+    ySpeeds.push(random(1, 5)); // Effect of gravity simulation
   }
 }
 
@@ -187,14 +211,15 @@ function drawBouncingBalls() {
       xSpeeds[i] = -xSpeed;
     }
     if (circles[i].y + circles[i].radius >= height) {
-      ySpeeds[i] = -ySpeed * 0.9; // Simulate the energy loss
+      ySpeeds[i] = -ySpeed * 0.9; // Simulation of energy loss
       circles[i].y = height - circles[i].radius; 
     } else {
-      ySpeeds[i] += 0.2; // Simulate gravity
+      ySpeeds[i] += 0.2; // Gravity simulation
     }
 
     fill(circles[i].r, circles[i].g, circles[i].b);
-    circle(circles[i].x, circles[i].y, circles[i].radius * 2);
+    noStroke();
+    ellipse(circles[i].x, circles[i].y, circles[i].radius * 2);
   }
 }
 
