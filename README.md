@@ -21,10 +21,10 @@ However, many jewel designers think "evil eye" contains wishes to avoid misfortu
 
 **-Technical Explorations**
 
-  **-function bouncingBalls()**
+  **i.function bouncingBalls()**
 
 This function was used in my Week 6 Quiz. In that quiz, the balls are floating. I changed them into bouncing the ground.
 
-  **-function drawEyes()**
+  **ii.function drawEyes()**
 
 This functions aims to imitate the eye movement. Calculating the distance between the mouse and eye center and the pupils will move with the mouse.
