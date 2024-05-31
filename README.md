@@ -14,6 +14,7 @@ This artwork inspires me to create the bouncing balls.
 ![A painting of Buchholz](assets/TheFalseMirror.jpg)
 The jewel designed by Dali and the painting created by Rene Magritte make me think of the famous element "evil eye".
 However, many jewel designers think "evil eye" contains wishes to avoid misfortune. So I think the new birth should be pure as blue.
+
 -Technical Explorations
  -function bouncingBalls()
 This function was used in my Week 6 Quiz. In that quiz, the balls are floating. I changed them into bouncing the ground.
